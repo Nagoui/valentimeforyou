@@ -1,0 +1,329 @@
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: pink;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .yes {
+            background: #ff4081;
+            color: white;
+        }
+        .no {
+            background: gray;
+            color: white;
+        }
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: red;
+            color: white;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: celebration 1s infinite;
+            z-index: 1;
+        }
+        @keyframes celebration {
+            0% {background: red;}
+            50% {background: pink;}
+            100% {background: red;}
+        }
+        .falling-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .falling-images img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.9;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="proposal-box">
+        <p class="question" id="question-text">Kya tum mujhe pasand karti ho?</p>
+        <div class="buttons">
+            <button class="btn yes" onclick="sayYes()">Yes</button>
+            <button class="btn no" onclick="askAgain()">No</button>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration">Love You ❤️</div>
+    <div class="falling-images" id="falling-images"></div>
+    
+    <script>
+        let questions = [
+            "Sure na?", "Pakka?", "Dobara soch lo?", "Sach me no?", "Ek baar fir socho?",
+            "Thoda dil se socho?", "Meri taraf dekho, ab bolo?", "Arey, sach me no?", "Dil ki suno na!",
+            "Mujhe dukhi mat karo 😢", "Zyada pyaar chahiye kya?", "Ek baar aur pucho?", "Mera dil toota! 💔",
+            "Agar haan na boli to?", "Zyada cute dikhu tab?", "Mujhe ek chance do na!",
+            "Sach me sure ho?", "Dil me dekh ke bolo!", "Ek pyari si smile do?", "Arey yaar, fir se bolo!",
+            "Tumhe mere bina accha lagega?", "Mujhe ignore mat karo 😞", "Pyaar me jadoo nahi dikha?",
+            "Ek baar meri aankhon me dekho!", "Sachi me no?", "Matlab sach me dil se no?", "Pakka na?",
+            "Aakhri baar puch raha hun, soch lo!", "Agar maine chhod diya to?", "Dil dukha diya 😭",
+            "Ek baar aur try karu?", "Tumhe surprise pasand hai?", "Bas ek baar haan bol do!",
+            "Tumhare bina kaise rahun?", "Ab to mazak ho gaya!", "Agar tum na boli to kya karu?",
+            "Pyaar ki koi feeling nahi aayi?", "Agar mai gift dunga tab?", "Ek smile to do?",
+            "Chalo ab pakka jawab do!"
+        ];
+        let count = 0;
+        let totalBoxes = 42; // कितने इमेज गिरेंगे
+        let animationSpeed = 5; // गिरने की गति (सेकंड में)
+        
+        function askAgain() {
+            if(count < questions.length - 1) {
+                document.getElementById('question-text').innerText = questions[count];
+                count++;
+            } else {
+                document.getElementById('question-text').innerText = "Ab to haan bol do na! 😍";
+            }
+        }
+        
+        function sayYes() {
+            document.getElementById('proposal-box').style.display = 'none';
+            document.getElementById('celebration').style.display = 'flex';
+            dropImages();
+        }
+        
+        function dropImages() {
+            let container = document.getElementById('falling-images');
+            let images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg","6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg",
+                    "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg","16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg",
+                    "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg","26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg",
+                    "31.jpg", "32.jpg", "33.jpg", "34.jpg", "35.jpg","36.jpg", "37.jpg", "38.jpg", "39.jpg", "40.jpg","41.jpg", "42.jpg"
+
+            ];
+            
+            for(let i = 0; i < totalBoxes; i++) {
+                let img = document.createElement('img');
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.style.left = Math.random() * 100 + "vw";
+                img.style.animationDuration = (Math.random() * 2 + animationSpeed) + "s";
+                container.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: pink;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            display: block;
+            z-index: 2;
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .yes {
+            background: #ff4081;
+            color: white;
+        }
+        .no {
+            background: gray;
+            color: white;
+        }
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .falling-images {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .falling-images img {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(180deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="proposal-box">
+        <p class="question" id="question-text">Kya tum mujhe pasand karti ho?</p>
+        <div class="buttons">
+            <button class="btn yes" onclick="sayYes()">Yes</button>
+            <button class="btn no" onclick="askAgain()">No</button>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration">
+        Love You to Mera Baccha  ❤️
+        <div class="falling-images" id="falling-images"></div>
+    </div>
+    
+    <script>
+        document.getElementById('proposal-box').style.display = 'block';
+        document.getElementById('celebration').style.display = 'none';
+
+        let questions = [
+            "Sure na?", "Pakka?", "Dobara soch lo?", "Sach me no?", "Ek baar fir socho?",
+            "Thoda dil se socho?", "Meri taraf dekho, ab bolo?", "Arey, sach me no?", "Dil ki suno na!",
+            "Mujhe dukhi mat karo 😢", "Zyada pyaar chahiye kya?", "Ek baar aur pucho?", "Mera dil toota! 💔",
+            "Agar haan na boli to?", "Zyada cute dikhu tab?", "Mujhe ek chance do na!", "Sach me sure ho?",
+            "Dil me dekh ke bolo!", "Ek pyari si smile do?", "Arey yaar, fir se bolo!",
+            "Phir se ek baar soch lo?", "Tumhara dil sach me no bol raha hai?", "Mujhse aur pyaar chahiye?",
+            "Agar mai aur sweet ban jau tab?", "Sach me no ka matlab no?", "Pyaar ka rang mehsus karo!",
+            "Abhi bhi no?", "Meri taraf dekho aur socho!", "Mujhe pyar se dekho!", "Pyar ki kasam, ek baar aur socho!",
+            "Agar mai ek surprise du tab?", "Kuch to bolo!", "Agar ye last baar pucha to?", "Dil ka awaaz suno!",
+            "Agar mai tumhare liye special kuch karu?", "Meri taraf ek baar aur dekho!", "Tumhare bina life kaise hogi?",
+            "Ab bhi no?", "Dil se bolo, dimaag se nahi!", "Agar tumse ek gift du tab?", "Arey ab maan bhi jao!"
+        ];
+        let count = 0;
+        
+        function askAgain() {
+            if(count < questions.length) {
+                document.getElementById('question-text').innerText = questions[count];
+                count++;
+            } else {
+                document.getElementById('question-text').innerText = "Ab to haan bol do na! 😍";
+            }
+        }
+        
+        function sayYes() {
+            document.getElementById('proposal-box').style.display = 'none';
+            document.getElementById('celebration').style.display = 'flex';
+            dropImages();
+        }
+        
+        function dropImages() {
+            let imageContainer = document.getElementById('falling-images');
+            let images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg","6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg",
+                    "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg","16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg",
+                    "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg","26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg",
+                    "31.jpg", "32.jpg", "33.jpg", "34.jpg", "35.jpg","36.jpg", "37.jpg", "38.jpg", "39.jpg", "40.jpg","41.jpg", "42.jpg"
+
+            ];
+            
+            for (let i = 0; i < 30; i++) {
+                let img = document.createElement('img');
+                img.src = images[Math.floor(Math.random() * images.length)];
+                img.style.left = Math.random() * 100 + 'vw';
+                img.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                imageContainer.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
